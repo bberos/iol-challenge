@@ -8,9 +8,27 @@ export const getAllCharactersList = async () => {
     console.log(e);
   }
 };
-export const get15Characters = async (charIds) => {
+export const getLimitCharacters = async (charIds) => {
   try {
     const response = await axios.get(`${API}/character/${charIds}`);
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getLocations = async () => {
+  try {
+    const response = await axios.get(`${API}/location`);
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getCharacter = async (chId) => {
+  try {
+    const response = await axios.get(`${API}/character/${chId}`);
     return response.data;
   } catch (e) {
     console.log(e);
