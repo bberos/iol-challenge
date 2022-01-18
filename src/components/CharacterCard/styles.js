@@ -3,18 +3,22 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: grey;
+  background-color: #121212;
   width: 15vw;
-  height: 80vh;
   align-items: center;
-  border-radius: 15px;
+  border-radius: 5px;
   margin: 10px 10px;
+  cursor: pointer;
+  transition: all 0.5s;
+  &:hover {
+    opacity: 0.8;
+  }
   h1 {
-    font-size: 1.5rem;
+    font-size: 0.6rem;
     width: 100%;
   }
   .characterImage {
-    width: 10vw;
     width: 100%;
+    border-radius: 0 0 5px 5px;
   }
 `;
