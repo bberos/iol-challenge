@@ -10,6 +10,7 @@ export const Container = styled.div`
   margin: 10px 10px;
   cursor: pointer;
   transition: all 0.5s;
+  z-index: 1;
   &:hover {
     opacity: 0.8;
   }
