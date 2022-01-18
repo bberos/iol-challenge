@@ -24,7 +24,7 @@ function CharacterCard({ characterData }) {
         style={{
           width: "20px",
           height: "20px",
-          backgroundColor: "red",
+          backgroundColor: checkIfIsFavourite() ? "red" : "blue",
           cursor: "pointer",
           position: "absolute",
           zIndex: 10,
