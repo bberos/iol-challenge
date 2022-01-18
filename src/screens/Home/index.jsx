@@ -8,6 +8,8 @@ import {
 import { Container, ListContainer } from "./styles";
 import ReactPaginate from "react-paginate";
 import ReactSelect from "react-select";
+import { Link } from "react-router-dom";
+import Paginate from "../../components/Paginate";
 
 export default function Home() {
   const [totalCharacters, setTotalCharacters] = useState(0);
@@ -15,14 +17,11 @@ export default function Home() {
   const [selectedLocation, setSelectedLocation] = useState();
   const [options, setOptions] = useState([]);
   const [actualPageIds, setActualPageIds] = useState("");
-
   const [characters, setCharacters] = useState([]);
-  const [idsByLocation, setIdsByLocation] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
-  // const [pages, setPages] = useState({});
   // ACA ARMO MY ARRAY DE .leng = 826 ITEMS
-  let myArray = [];
+  let charIdsArray = [];
   const limit = 15;
   let totalPaginas = Math.ceil(totalCharacters / limit);
   const pages = {};
@@ -32,9 +31,9 @@ export default function Home() {
   }, []);
   useEffect(() => {
     if (totalCharacters !== undefined) {
-      hacerArray();
+      arrayMaker();
       // hacerObjeto();
-      dividirArray();
+      arrayDivider();
       if (selectedLocation === undefined) {
         pageData();
       }
@@ -47,7 +46,7 @@ export default function Home() {
 
   useEffect(() => {
     if (selectedLocation !== undefined) {
-      cortarIds();
+      splitByLocationIds();
       pageDataByLocation();
     }
   }, [selectedLocation, page]);
@@ -74,9 +73,9 @@ export default function Home() {
   };
 
   // CREAMOS EL ARRAY DE TODOS LOS IDS
-  const hacerArray = () => {
+  const arrayMaker = () => {
     for (let index = 1; index <= totalCharacters; index++) {
-      myArray.push(index);
+      charIdsArray.push(index);
     }
   };
 
@@ -88,7 +87,7 @@ export default function Home() {
     }
   };
 
-  const dividirArray = (data = myArray) => {
+  const arrayDivider = (data = charIdsArray) => {
     const myNewArray = data.map((e) => e);
     let paginaActual = 1;
     for (let id = 0; id <= data.length; id++) {
@@ -118,16 +117,15 @@ export default function Home() {
   //pagination
   const handleOnPageChange = (data) => {
     let selected = data.selected + 1;
-    console.log("HANDLE CHANGE BY LOCATION");
     setPage(selected);
   };
   //select
   const handleChangeLocation = (selectedOption) => {
     setSelectedLocation(selectedOption);
-    // cortarIds(selectedOption);
+    // splitByLocationIds(selectedOption);
   };
 
-  const cortarIds = () => {
+  const splitByLocationIds = () => {
     let resultsLocationIds = [];
     setTotalCharacters(selectedLocation.residents.length);
     console.log("ENTRA AL CORTAR");
@@ -140,12 +138,12 @@ export default function Home() {
         resultsLocationIds.push(e.substr(-1));
       }
     });
-    dividirArrayLocation(resultsLocationIds);
+    arrayDividerByLocation(resultsLocationIds);
     pageDataByLocation();
     fetchCaractersByLocation();
   };
 
-  const dividirArrayLocation = (resultsLocationIds) => {
+  const arrayDividerByLocation = (resultsLocationIds) => {
     console.log("PAGINACION DE LOCATION");
     let nuevoArray = resultsLocationIds.map((e) => e);
     let paginaActual = 1;
@@ -183,6 +181,9 @@ export default function Home() {
         // searchable={this.state.searchable}
         options={options}
       />
+      <Link to="/favourites">
+        <button>Favoritos</button>
+      </Link>
       <h1>Personajes</h1>
       {isLoading ? (
         <h1>Cargando</h1>
@@ -197,22 +198,10 @@ export default function Home() {
               })
             )}
           </ListContainer>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <ReactPaginate
-              className="paginate"
-              previousLabel={"<"}
-              nextLabel={">"}
-              breakLabel={<a href="">...</a>}
-              breakClassName={"break-me"}
-              pageCount={totalPaginas}
-              marginPagesDisplayed={1}
-              pageRangeDisplayed={5}
-              onPageChange={handleOnPageChange}
-              containerClassName={"pagination"}
-              subContainerClassName={"pages pagination"}
-              activeClassName={"active"}
-            />
-          </div>
+          <Paginate
+            totalPaginas={totalPaginas}
+            handleOnPageChange={handleOnPageChange}
+          />
         </div>
       )}
     </Container>
