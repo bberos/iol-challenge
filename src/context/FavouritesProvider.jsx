@@ -5,19 +5,6 @@ export default function FavouritesProvider({ children }) {
   const [favCharactersIds, setFavCharactersIds] = useState(() =>
     JSON.parse(window.localStorage.getItem("@favourites_characters") || "[]")
   );
-  const getFavouritesData = async () => {
-    // try {
-    //   const jsonValue = JSON.parse(
-    //     window.localStorage.getItem("@favourites_characters") || "[]"
-    //   );
-    //   setFavCharactersIds(jsonValue);
-    // } catch (e) {
-    //   console.log(e);
-    // }
-  };
-  useEffect(() => {
-    getFavouritesData();
-  });
 
   const storeFavCharactersIds = (charId) => {
     try {
