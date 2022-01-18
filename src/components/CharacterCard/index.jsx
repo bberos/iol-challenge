@@ -1,15 +1,41 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useFavourites } from "../../context/FavouritesProvider";
 import { Container } from "./styles";
 function CharacterCard({ characterData }) {
   const { id, name, image } = characterData;
+  const { favCharactersIds, storeFavCharactersIds, removeFavCharracterId } =
+    useFavourites();
+
+  const checkIfIsFavourite = () =>
+    favCharactersIds.some((value) => value === id);
+
+  const handleFavouriteChar = () => {
+    if (checkIfIsFavourite()) {
+      console.log("Esta repetido alguno");
+      return removeFavCharracterId(id);
+    }
+    console.log("No esta repetido");
+    return storeFavCharactersIds(id);
+  };
   return (
-    <Link to={"/character/" + id}>
-      <Container>
+    <Container>
+      <div
+        style={{
+          width: "20px",
+          height: "20px",
+          backgroundColor: "red",
+          cursor: "pointer",
+          position: "absolute",
+          zIndex: 10,
+        }}
+        onClick={handleFavouriteChar}
+      />
+      <Link to={"/character/" + id}>
         <h1>{name}</h1>
         <img className="characterImage" src={image} alt="character-image" />
-      </Container>
-    </Link>
+      </Link>
+    </Container>
   );
 }
 
