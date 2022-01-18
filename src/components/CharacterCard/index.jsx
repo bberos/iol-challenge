@@ -12,10 +12,8 @@ function CharacterCard({ characterData }) {
 
   const handleFavouriteChar = () => {
     if (checkIfIsFavourite()) {
-      console.log("Esta repetido alguno");
       return removeFavCharracterId(id);
     }
-    console.log("No esta repetido");
     return storeFavCharactersIds(id);
   };
   return (
