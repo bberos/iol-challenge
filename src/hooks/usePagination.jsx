@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import { getAllCharactersList, getLimitCharacters } from "../services/request";
 import useLocation from "./useLocation";
 
-export default function usePagination({ limit, selectedLocation, page }) {
+export default function usePagination({
+  limit,
+  selectedLocation,
+  isFavouritePage,
+  totalFavChars,
+  favCharactersIds,
+}) {
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [totalCharacters, setTotalCharacters] = useState(0);
   const [actualPageIds, setActualPageIds] = useState("");
@@ -22,23 +29,35 @@ export default function usePagination({ limit, selectedLocation, page }) {
   let charIdsArray = [];
   let totalPaginas = Math.ceil(totalCharacters / limit);
 
+  // If is HomeScreen fetch total number of character count and save in the state.
+  // If is FavouriteScreen save in state the count of localStorage data.
   useEffect(() => {
-    fetchNumberOfCharacters();
+    {
+      !isFavouritePage
+        ? fetchNumberOfCharacters()
+        : setTotalCharacters(totalFavChars);
+    }
   }, []);
+
+  // Execute this if totalCharacters fetch is success.
+  // If is HomeScreen use arrayMaker.
+  // If is not a filter location query make the pagination.
+  // Execute this if the totalCharacters or page change or if add/remove some favourite character.
   useEffect(() => {
     if (totalCharacters !== undefined) {
-      arrayMaker();
-      // hacerObjeto();
+      {
+        !isFavouritePage && arrayMaker();
+      }
       arrayDivider();
       if (selectedLocation === undefined) {
         pageData();
       }
     }
-  }, [totalCharacters, page]);
+  }, [totalCharacters, page, favCharactersIds]);
 
   useEffect(() => {
     fetchCharacters();
-  }, [actualPageIds]);
+  }, [characters]);
 
   const fetchNumberOfCharacters = async () => {
     const charactersData = await getAllCharactersList();
@@ -46,14 +65,17 @@ export default function usePagination({ limit, selectedLocation, page }) {
     setIsLoading(false);
   };
 
-  // CREAMOS EL ARRAY DE TODOS LOS IDS
+  // Function to create array with the total characters count. Ex: totalCount 3 return [1,2,3].
   const arrayMaker = () => {
     for (let index = 1; index <= totalCharacters; index++) {
       charIdsArray.push(index);
     }
   };
 
-  const arrayDivider = (data = charIdsArray) => {
+  // Fuction to divide the characters ids in pages depend of the limit of results and update pages object.
+  const arrayDivider = (
+    data = !isFavouritePage ? charIdsArray : favCharactersIds
+  ) => {
     const myNewArray = data.map((e) => e);
     let paginaActual = 1;
     for (let id = 0; id <= data.length; id++) {
@@ -86,5 +108,7 @@ export default function usePagination({ limit, selectedLocation, page }) {
     totalPaginas,
     pages,
     options,
+    page,
+    setPage,
   };
 }
