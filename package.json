@@ -13,7 +13,8 @@
     "react-paginate": "^8.1.0",
     "react-router-dom": "6",
     "react-select": "^5.2.2",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "vite-plugin-svgr": "^1.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",
