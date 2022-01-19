@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getLimitCharacters, getLocations } from "../services/request";
 
 export default function useLocation(props) {
@@ -13,12 +13,16 @@ export default function useLocation(props) {
     setActualPageIds,
     setCharacters,
   } = props;
-
   const [locations, setLocations] = useState();
   const [options, setOptions] = useState([]);
+
+  // Get all locations from api/location.
   useEffect(() => {
     fetchLocations();
   }, []);
+
+  // If is a filter by location make the split strings function and paginate.
+  // Repeated if change the location or page change.
   useEffect(() => {
     if (selectedLocation !== undefined) {
       splitByLocationIds();
@@ -26,12 +30,11 @@ export default function useLocation(props) {
     }
   }, [selectedLocation, page]);
 
+  //Save options value and label for react-select library & residents for split the strings.
   const fetchLocations = async () => {
-    console.log("entra en options");
-    const locations = await getLocations();
+    let locations = await getLocations();
     setLocations(locations.results);
     setIsLoading(false);
-    //guardo las opciones para usar react-select
     let options = locations.results.map((e) => {
       return {
         value: e.id,
@@ -41,6 +44,10 @@ export default function useLocation(props) {
     });
     setOptions(options);
   };
+
+  // This function split the strings obtain in fetchLocation.
+  // If it's 3 digit id is 45 characters, 2 digit 44 and 1 digit 43.
+  // Then divider for paginate.
   const splitByLocationIds = () => {
     let resultsLocationIds = [];
     setTotalCharacters(selectedLocation.residents.length);
@@ -58,6 +65,7 @@ export default function useLocation(props) {
     fetchCaractersByLocation();
   };
 
+  // Divide the array of ids in pages with the limit prop.
   const arrayDividerByLocation = (resultsLocationIds) => {
     let nuevoArray = resultsLocationIds.map((e) => e);
     let paginaActual = 1;
@@ -73,11 +81,14 @@ export default function useLocation(props) {
       }
     }
   };
+
+  //Need join the array for fetch.
   const pageDataByLocation = () => {
     let pageName = `page${page}`;
     let data = pages[pageName].join();
     setActualPageIds(data);
   };
+
   const fetchCaractersByLocation = async () => {
     const charactersData = await getLimitCharacters(actualPageIds);
     setCharacters(charactersData);
