@@ -57,7 +57,7 @@ export default function usePagination({
 
   useEffect(() => {
     fetchCharacters();
-  }, [characters]);
+  }, [actualPageIds]);
 
   const fetchNumberOfCharacters = async () => {
     const charactersData = await getAllCharactersList();
@@ -97,6 +97,7 @@ export default function usePagination({
     setActualPageIds(data);
   };
   const fetchCharacters = async () => {
+    console.log("entra al fetch");
     const charactersData = await getLimitCharacters(actualPageIds);
     setCharacters(charactersData);
     setIsLoading(false);
