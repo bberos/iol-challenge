@@ -4,8 +4,13 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
-export const ListContainer = styled.div`
+
+export const SubHeader = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  position: sticky;
+  z-index: 2;
+  top: 5px;
 `;
