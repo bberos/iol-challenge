@@ -15,8 +15,9 @@ export const Container = styled.div`
     opacity: 0.8;
   }
   h1 {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     width: 100%;
+    padding: 5px 0px;
   }
   .characterImage {
     width: 100%;
