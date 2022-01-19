@@ -1,7 +1,11 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 import { Container } from "./styles";
-export default function Paginate({ totalPaginas, handleOnPageChange }) {
+export default function Paginate({ totalPaginas, setPage }) {
+  const handleOnPageChange = (data) => {
+    let selected = data.selected + 1;
+    setPage(selected);
+  };
   return (
     <Container style={{ display: "flex", flexDirection: "row" }}>
       <ReactPaginate
