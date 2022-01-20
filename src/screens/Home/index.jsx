@@ -8,17 +8,17 @@ import SelectLocation from "../../components/SelectLocation";
 import Characters from "../../components/Characters";
 import { ReactComponent as FavIcon } from "./../../assets/icons/pickleFav.svg";
 import { useFavourites } from "../../context/FavouritesProvider";
+import Loader from "../../components/Loader";
 
-export default function Home() {
+function Home() {
   const [selectedLocation, setSelectedLocation] = useState();
-
   //Custom hook
   const { isLoading, characters, totalPaginas, options, page, setPage } =
     usePagination({
       limit: 15,
       selectedLocation,
     });
-  const { setIsFavouritePage } = useFavourites();
+  const { favCharactersIds, setIsFavouritePage } = useFavourites();
 
   useEffect(() => {
     setIsFavouritePage(false);
@@ -33,16 +33,24 @@ export default function Home() {
           setSelectedLocation={setSelectedLocation}
           setPage={setPage}
         />
-        <Link to="/favourites">
-          <FavouriteButton>
+        <Link to={favCharactersIds.length > 0 ? "/favourites" : "/"}>
+          <FavouriteButton isDisabled={favCharactersIds.length > 0}>
             <h1>Ver Favoritos</h1>
             <FavIcon width="25px" height="30px" fill="#06750e" />
           </FavouriteButton>
         </Link>
       </SubHeader>
       <h1 className="title">Personajes</h1>
-      {isLoading ? <h1>Cargando</h1> : <Characters characters={characters} />}
-      <Paginate totalPaginas={totalPaginas} page={page} setPage={setPage} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <Characters characters={characters} />
+          <Paginate totalPaginas={totalPaginas} page={page} setPage={setPage} />
+        </>
+      )}
     </Container>
   );
 }
+
+export default React.memo(Home);
