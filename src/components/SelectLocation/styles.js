@@ -1,15 +1,25 @@
 import styled from "styled-components";
+import { media } from "../../styles/media";
 export const Container = styled.div`
-  width: 250px;
-  margin-right: 100px;
+  ${media.mobileS} {
+    width: 300px;
+    margin-right: 0px;
+  }
+  ${media.laptop} {
+    width: 250px;
+    margin-right: 100px;
+  }
   .select {
     color: #fdfdfd;
     box-shadow: 1px 7px 12px 0px rgb(0 0 0 / 75%);
     -webkit-box-shadow: 1px 7px 12px 0px rgb(0 0 0 / 75%);
     -moz-box-shadow: 1px 7px 12px 0px rgba(0, 0, 0, 0.75);
     transition: all 0.2s;
-    &:hover {
-      transform: scale(1.02);
+    ${media.laptop} {
+      &:hover {
+        transform: scale(1.02);
+        z-index: 20;
+      }
     }
   }
   .selectPrefix {
