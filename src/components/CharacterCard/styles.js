@@ -2,14 +2,23 @@ import styled from "styled-components";
 import { media } from "./../../styles/media";
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 15vw;
-  align-items: center;
-  margin: 10px 10px;
-  /* cursor: pointer; */
-  transition: all 0.5s;
-  z-index: 1;
+  ${media.laptop} {
+    display: flex;
+    flex-direction: column;
+    width: 15vw;
+    align-items: center;
+    margin: 10px 10px;
+    transition: all 0.5s;
+    z-index: 1;
+  }
+  ${media.mobileS} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 10px;
+    transition: all 0.5s;
+    z-index: 1;
+  }
   &:hover {
     opacity: 0.8;
   }
@@ -50,11 +59,16 @@ export const HeadContainer = styled.div`
       font-size: 1rem;
       padding-left: 10px;
     }
+    ${media.mobileS} {
+      font-size: 1rem;
+    }
   }
   .icon {
     z-index: 10;
     cursor: pointer;
     transition: all 0.2s;
+    outline: transparent;
+    -webkit-tap-highlight-color: transparent;
     ${media.desktop} {
       transform: scale(1.5);
     }
