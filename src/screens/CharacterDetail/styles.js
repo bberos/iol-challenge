@@ -20,6 +20,13 @@ export const CardContainer = styled.div`
   box-shadow: 1px 7px 12px 0px rgb(0 0 0 / 75%);
   -webkit-box-shadow: 1px 7px 12px 0px rgb(0 0 0 / 75%);
   -moz-box-shadow: 1px 7px 12px 0px rgba(0, 0, 0, 0.75);
+  ${media.mobileS} {
+    height: 60vh;
+    flex-direction: column;
+  }
+  ${media.laptop} {
+    flex-direction: row;
+  }
   ${media.desktop} {
     height: 30vh;
     width: 35%;
@@ -40,8 +47,11 @@ export const InfoContainer = styled.div`
   /* align-self: flex-start; */
   h1 {
     /* margin: 0; */
-    font-size: 1.5rem;
+    font-size: 1.15rem;
     text-align: left;
+    ${media.laptop} {
+      font-size: 1.5rem;
+    }
     b {
       text-decoration: underline;
     }
