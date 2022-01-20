@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Container } from "./styles";
 import Characters from "../../components/Characters";
 import Paginate from "../../components/Paginate";
 import { useFavourites } from "../../context/FavouritesProvider";
@@ -16,14 +17,14 @@ export default function Favourites() {
     setIsFavouritePage(true);
   });
   return (
-    <div>
-      <h1>Mis Favoritos</h1>
+    <Container>
+      <h1 className="title">Mis Favoritos</h1>
       {isLoading || characters.info ? (
         <h1>Cargando</h1>
       ) : (
         <Characters characters={characters} />
       )}
       <Paginate totalPaginas={totalPaginas} page={page} setPage={setPage} />
-    </div>
+    </Container>
   );
 }
