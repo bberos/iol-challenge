@@ -6,6 +6,7 @@ export default function FavouritesProvider({ children }) {
   const [favCharactersIds, setFavCharactersIds] = useState(() =>
     JSON.parse(window.localStorage.getItem("@favourites_characters") || "[]")
   );
+  const [isFavouritePage, setIsFavouritePage] = useState(false);
 
   const storeFavCharactersIds = (charId) => {
     try {
@@ -24,12 +25,15 @@ export default function FavouritesProvider({ children }) {
     window.localStorage.setItem("@favourites_characters", jsonValue);
     setFavCharactersIds(newFavourite);
   };
+
   return (
     <FavouritesContext.Provider
       value={{
         favCharactersIds,
         storeFavCharactersIds,
         removeFavCharracterId,
+        isFavouritePage,
+        setIsFavouritePage,
       }}
     >
       {children}
