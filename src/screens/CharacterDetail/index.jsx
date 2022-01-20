@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getCharacter } from "../../services/request";
 import { useParams, useNavigate } from "react-router-dom";
+import {
+  Container,
+  CardContainer,
+  ImageContainer,
+  InfoContainer,
+} from "./styles";
 export default function CharacterDetail(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [character, setCharacter] = useState();
@@ -19,14 +25,20 @@ export default function CharacterDetail(props) {
       {isLoading ? (
         <h1>Cargando</h1>
       ) : (
-        <div>
-          <h1>Nombre:{character.name} </h1>
-          <img src={character.image} alt="photo" />
-          <h1>Estado:{character.status} </h1>
-          <h1>Origen:{character.origin.name} </h1>
-          <h1>Locacion:{character.location.name} </h1>
-          <button onClick={() => navigate(-1)}>Volver</button>
-        </div>
+        <Container>
+          <CardContainer>
+            <ImageContainer>
+              <img className="image" src={character.image} alt="photo" />
+            </ImageContainer>
+            <InfoContainer>
+              <h1>Nombre:{character.name} </h1>
+              <h1>Estado:{character.status} </h1>
+              <h1>Origen:{character.origin.name} </h1>
+              <h1>Locacion:{character.location.name} </h1>
+            </InfoContainer>
+            <button onClick={() => navigate(-1)}>Volver</button>
+          </CardContainer>
+        </Container>
       )}
     </div>
   );
