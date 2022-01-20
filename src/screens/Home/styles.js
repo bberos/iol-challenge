@@ -44,7 +44,10 @@ export const SubHeader = styled.div`
 
 export const FavouriteButton = styled.div`
   display: flex;
-  border: 1px solid hsl(72, 71%, 56%, 0.8);
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${(props) =>
+    props.isDisabled ? "hsl(72, 71%, 56%, 0.8)" : "#878787"};
   align-items: center;
   height: 38px;
   border-radius: 4px;
@@ -53,9 +56,9 @@ export const FavouriteButton = styled.div`
   outline: 0;
   opacity: 0.9;
   transition: all 0.2s;
-  box-shadow: 1px 7px 12px 0px rgb(0 0 0 / 75%);
-  -webkit-box-shadow: 1px 7px 12px 0px rgb(0 0 0 / 75%);
-  -moz-box-shadow: 1px 7px 12px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 7px 12px 0px rgb(0 0 0 / 40%);
+  -webkit-box-shadow: 1px 7px 12px 0px rgb(0 0 0 / 40%);
+  -moz-box-shadow: 1px 7px 12px 0px rgba(0, 0, 0, 0.4);
   ${media.mobileS} {
     margin-top: 15px;
     width: 300px;
@@ -66,13 +69,13 @@ export const FavouriteButton = styled.div`
     width: 250px;
     &:hover {
       opacity: 1;
-      transform: scale(1.02);
+      transform: ${(props) => (props.isDisabled ? "scale(1.02)" : "scale(1)")};
     }
   }
   h1 {
     font-size: 1.1rem;
     margin-right: 10px;
     font-weight: 500;
-    color: #fdfdfd;
+    color: ${(props) => (props.isDisabled ? "#fdfdfd" : "#878787")};
   }
 `;
