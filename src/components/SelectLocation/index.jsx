@@ -15,6 +15,8 @@ export default function SelectLocation(props) {
         options={options}
         placeholder="Buscar por Locación"
         className="select"
+        closeMenuOnScroll="onScroll"
+        classNamePrefix="selectPrefix"
       />
     </Container>
   );
