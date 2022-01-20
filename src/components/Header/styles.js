@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "../../styles/media";
 export const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -18,6 +19,7 @@ export const Container = styled.div`
     top: 40px;
     width: 60px;
     transition: all 0.2s;
+    cursor: pointer;
     &:hover {
       transform: scale(1.1);
     }
