@@ -15,17 +15,6 @@ export default function usePagination({
   const [actualPageIds, setActualPageIds] = useState("");
   const [characters, setCharacters] = useState([]);
   const pages = {};
-  const { options } = useLocation({
-    selectedLocation,
-    page,
-    limit,
-    pages,
-    actualPageIds,
-    setIsLoading,
-    setTotalCharacters,
-    setActualPageIds,
-    setCharacters,
-  });
   let charIdsArray = [];
   let totalPaginas = Math.ceil(totalCharacters / limit);
 
@@ -58,6 +47,18 @@ export default function usePagination({
   useEffect(() => {
     fetchCharacters();
   }, [actualPageIds]);
+
+  const { options } = useLocation({
+    selectedLocation,
+    page,
+    limit,
+    pages,
+    actualPageIds,
+    setIsLoading,
+    setTotalCharacters,
+    setActualPageIds,
+    setCharacters,
+  });
 
   const fetchNumberOfCharacters = async () => {
     const charactersData = await getAllCharactersList();
@@ -97,7 +98,6 @@ export default function usePagination({
     setActualPageIds(data);
   };
   const fetchCharacters = async () => {
-    console.log("entra al fetch");
     const charactersData = await getLimitCharacters(actualPageIds);
     setCharacters(charactersData);
     setIsLoading(false);
