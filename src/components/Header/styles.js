@@ -6,25 +6,40 @@ export const Container = styled.div`
   padding: 5px 25px;
   align-items: center;
   position: sticky;
-  z-index: 2;
   top: 0;
   background-color: #030303c2;
   box-shadow: 1px 4px 7px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 1px 4px 7px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 1px 4px 7px 0px rgba(0, 0, 0, 0.75);
+  ${media.mobileS} {
+    z-index: 3;
+  }
+  ${media.laptop} {
+    z-index: 2;
+  }
   .backIcon {
     position: absolute;
     left: 0;
     margin-left: 20px;
-    top: 40px;
     width: 60px;
     transition: all 0.2s;
     cursor: pointer;
     &:hover {
       transform: scale(1.1);
     }
+    ${media.mobileS} {
+      top: 22px;
+    }
+    ${media.laptop} {
+      top: 40px;
+    }
   }
   .logo {
-    width: 250px;
+    ${media.mobileS} {
+      width: 150px;
+    }
+    ${media.laptop} {
+      width: 250px;
+    }
   }
 `;
