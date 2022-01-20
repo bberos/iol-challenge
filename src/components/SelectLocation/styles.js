@@ -11,9 +11,9 @@ export const Container = styled.div`
   }
   .select {
     color: #fdfdfd;
-    box-shadow: 1px 7px 12px 0px rgb(0 0 0 / 75%);
-    -webkit-box-shadow: 1px 7px 12px 0px rgb(0 0 0 / 75%);
-    -moz-box-shadow: 1px 7px 12px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 7px 12px 0px rgb(0 0 0 / 40%);
+    -webkit-box-shadow: 1px 7px 12px 0px rgb(0 0 0 / 40%);
+    -moz-box-shadow: 1px 7px 12px 0px rgba(0, 0, 0, 0.4);
     transition: all 0.2s;
     ${media.laptop} {
       &:hover {
