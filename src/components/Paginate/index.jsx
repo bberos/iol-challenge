@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 import { Container } from "./styles";
-export default function Paginate({ totalPaginas, setPage }) {
+function Paginate({ totalPaginas, setPage }) {
   const handleOnPageChange = (data) => {
     let selected = data.selected + 1;
     setPage(selected);
@@ -25,3 +25,5 @@ export default function Paginate({ totalPaginas, setPage }) {
     </Container>
   );
 }
+
+export default React.memo(Paginate);

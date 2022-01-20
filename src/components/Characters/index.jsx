@@ -2,7 +2,7 @@ import React from "react";
 import CharacterCard from "../CharacterCard";
 import { Container, ListContainer } from "./styles";
 
-export default function Characters({ characters }) {
+function Characters({ characters }) {
   return (
     <Container>
       <ListContainer>
@@ -17,3 +17,5 @@ export default function Characters({ characters }) {
     </Container>
   );
 }
+
+export default React.memo(Characters);
