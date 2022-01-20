@@ -46,13 +46,23 @@ export const HeadContainer = styled.div`
     padding: 5px 0px;
     text-align: left;
     padding-left: 7px;
+    ${media.desktop} {
+      font-size: 1rem;
+      padding-left: 10px;
+    }
   }
   .icon {
     z-index: 10;
     cursor: pointer;
     transition: all 0.2s;
+    ${media.desktop} {
+      transform: scale(1.5);
+    }
     &:hover {
       transform: scale(1.05);
+      ${media.desktop} {
+        transform: scale(1.6);
+      }
     }
   }
 `;
